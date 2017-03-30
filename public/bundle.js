@@ -26648,6 +26648,7 @@
 	    _this.prev = _this.prev.bind(_this);
 	    _this.selectAlbum = _this.selectAlbum.bind(_this);
 	    _this.selectArtist = _this.selectArtist.bind(_this);
+	    _this.savePlaylist = _this.savePlaylist.bind(_this);
 	    return _this;
 	  }
 	
@@ -26656,7 +26657,7 @@
 	    value: function componentDidMount() {
 	      var _this2 = this;
 	
-	      Promise.all([_axios2.default.get('/api/albums/'), _axios2.default.get('/api/artists/')]).then(function (res) {
+	      Promise.all([_axios2.default.get('/api/albums/'), _axios2.default.get('/api/artists/'), _axios2.default.get('/api/playlists/')]).then(function (res) {
 	        return res.map(function (r) {
 	          return r.data;
 	        });
@@ -26673,10 +26674,11 @@
 	    }
 	  }, {
 	    key: 'onLoad',
-	    value: function onLoad(albums, artists) {
+	    value: function onLoad(albums, artists, playlists) {
 	      this.setState({
 	        albums: (0, _utils.convertAlbums)(albums),
-	        artists: artists
+	        artists: artists,
+	        playlists: playlists
 	      });
 	    }
 	  }, {
@@ -26770,6 +26772,19 @@
 	      this.setState({ selectedArtist: artist });
 	    }
 	  }, {
+	    key: 'savePlaylist',
+	    value: function savePlaylist(value) {
+	      var _this5 = this;
+	
+	      _axios2.default.post('/api/playlists', { name: value }).then(function (res) {
+	        return res.data;
+	      }).then(function (result) {
+	        _this5.state.playlists.push(result); // adds the new playlist to playlist state
+	        _this5.setState({ playlists: _this5.state.playlists });
+	        console.log(result); // response json from the server!
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	
@@ -26777,7 +26792,8 @@
 	        toggleOne: this.toggleOne,
 	        toggle: this.toggle,
 	        selectAlbum: this.selectAlbum,
-	        selectArtist: this.selectArtist
+	        selectArtist: this.selectArtist,
+	        savePlaylist: this.savePlaylist
 	      });
 	
 	      return _react2.default.createElement(
@@ -26786,7 +26802,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-xs-2' },
-	          _react2.default.createElement(_Sidebar2.default, null)
+	          _react2.default.createElement(_Sidebar2.default, { playlists: this.state.playlists })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -28602,6 +28618,9 @@
 	
 	var Sidebar = function Sidebar(props) {
 	
+	  var playlists = props.playlists;
+	  console.log(playlists);
+	
 	  return _react2.default.createElement(
 	    'sidebar',
 	    null,
@@ -28644,24 +28663,17 @@
 	      _react2.default.createElement(
 	        'ul',
 	        { className: 'list-unstyled', style: { paddingLeft: 14 } },
-	        _react2.default.createElement(
-	          'li',
-	          { className: 'playlist-item' },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: 'FILL_ME_IN' },
-	            'some playlist'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'li',
-	          { className: 'playlist-item' },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: 'WHERE_TO_GO' },
-	            'another playlist'
-	          )
-	        )
+	        playlists.map(function (playlist) {
+	          return _react2.default.createElement(
+	            'li',
+	            { key: playlist.id, className: 'playlist-item' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/playlist/' + playlist.id },
+	              playlist.name
+	            )
+	          );
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'h4',
@@ -29177,7 +29189,6 @@
 	    _this.inputOnChange = _this.inputOnChange.bind(_this);
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
 	    _this.toggleButton = _this.toggleButton.bind(_this);
-	    _this.savePlaylist = _this.savePlaylist.bind(_this);
 	    return _this;
 	  }
 	
@@ -29196,18 +29207,10 @@
 	      });
 	    }
 	  }, {
-	    key: 'savePlaylist',
-	    value: function savePlaylist(value) {
-	      _axios2.default.post('/api/playlists', { name: value }).then(function (res) {
-	        return res.data;
-	      }).then(function (result) {
-	        console.log(result); // response json from the server!
-	      });
-	    }
-	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit() {
-	      this.savePlaylist(this.state.inputValue);
+	      console.log(this.props);
+	      this.props.savePlaylist(this.state.inputValue);
 	      this.setState({
 	        inputValue: ''
 	      });

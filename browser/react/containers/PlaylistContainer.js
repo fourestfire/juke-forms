@@ -11,7 +11,6 @@ class PlaylistContainer extends React.Component {
     this.inputOnChange = this.inputOnChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.toggleButton = this.toggleButton.bind(this)
-    this.savePlaylist = this.savePlaylist.bind(this)
   }
 
   inputOnChange (value) {
@@ -26,16 +25,9 @@ class PlaylistContainer extends React.Component {
       })
   }
 
-  savePlaylist (value) {
-    axios.post('/api/playlists', {name: value})
-    .then(res => res.data)
-    .then(result => {
-    console.log(result) // response json from the server!
-    });
-  }
-
   handleSubmit () {
-    this.savePlaylist(this.state.inputValue)
+    console.log(this.props)
+    this.props.savePlaylist(this.state.inputValue)
     this.setState({
       inputValue: ''
     })
