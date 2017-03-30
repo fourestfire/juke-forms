@@ -5,7 +5,7 @@ const Sidebar = (props) => {
 
   return (
     <sidebar>
-      <img src="juke.svg" className="logo" />
+      <img src="/juke.svg" className="logo" />
       <section>
         <h4 className="menu-item">
           <Link to='/albums'>ALBUMS</Link>
@@ -16,7 +16,17 @@ const Sidebar = (props) => {
           <Link to='/artists'>ARTISTS</Link>
         </h4>
       </section>
+      <hr />
+        <section>
+          <h4 className="text-muted">PLAYLISTS</h4>
+          <h4>
+            <Link className="btn btn-primary btn-block" to={`/albums/playlists/new`}>
+              <span className="glyphicon glyphicon-plus"></span> PLAYLIST
+            </Link>
+          </h4>
+        </section>
     </sidebar>
+
   );
 }
 
