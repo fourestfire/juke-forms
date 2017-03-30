@@ -1,8 +1,6 @@
 import React from 'react';
 import NewPlaylist from '../components/NewPlaylist'
-import SinglePlaylist from '../components/SinglePlaylist'
-import {initialInputValue} from '../utils'
-import axios from 'axios';
+import {initialInputValue} from '../utils' // hack-ish way to make sure validation doesn't occur on page load. uses es6 Symbol primitive
 
 class PlaylistContainer extends React.Component {
 
@@ -35,7 +33,6 @@ class PlaylistContainer extends React.Component {
   }
 
   render () {
-// <SinglePlaylist playlist = {this.props.playlists}/>
     return (
       <div>
         <div>

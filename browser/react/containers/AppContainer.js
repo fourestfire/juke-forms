@@ -9,6 +9,8 @@ import Album from '../components/Album';
 import Sidebar from '../components/Sidebar';
 import Player from '../components/Player';
 
+import { browserHistory } from 'react-router';
+
 import { convertAlbum, convertAlbums, convertSong, skip } from '../utils';
 
 export default class AppContainer extends Component {
@@ -134,7 +136,9 @@ export default class AppContainer extends Component {
       .then(result => {
       this.state.playlists.push(result) // adds the new playlist to playlist state
         this.setState({ playlists: this.state.playlists })
-      console.log(result) // response json from the server!
+      const path = `/playlists/${result.id}/`
+      browserHistory.push(path)
+      // console.log("new post", result) // response json from the server!
       });
     }
 

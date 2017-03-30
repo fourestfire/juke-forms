@@ -15,9 +15,7 @@ class SinglePlaylist extends React.Component {
       const selectPlaylist = this.props.selectPlaylist;
       const playlistId = nextProps.routeParams.playlistId;
       selectPlaylist(playlistId);
-      console.log('run')
     }
-    else return;
   }
 
   render () {
