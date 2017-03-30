@@ -27,7 +27,7 @@ const Sidebar = (props) => {
                 playlists.map(playlist => {
                   return (
                     <li key={playlist.id} className="playlist-item">
-                     <Link to={`/playlist/${playlist.id}`}>{playlist.name}</Link>
+                     <Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
                     </li>
                   )
                 })
@@ -35,7 +35,7 @@ const Sidebar = (props) => {
             </ul>
 
           <h4>
-            <Link className="btn btn-primary btn-block" to={`/albums/playlists/new`}>
+            <Link className="btn btn-primary btn-block" to={`/playlists/new`}>
               <span className="glyphicon glyphicon-plus"></span> PLAYLIST
             </Link>
           </h4>

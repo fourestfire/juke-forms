@@ -1,5 +1,6 @@
 import React from 'react';
 import NewPlaylist from '../components/NewPlaylist'
+import SinglePlaylist from '../components/SinglePlaylist'
 import {initialInputValue} from '../utils'
 import axios from 'axios';
 
@@ -34,16 +35,18 @@ class PlaylistContainer extends React.Component {
   }
 
   render () {
-
+// <SinglePlaylist playlist = {this.props.playlists}/>
     return (
       <div>
-        <NewPlaylist
-          btnSwitch = {this.state.btnSwitch}
-          inputValue = {this.state.inputValue}
-          inputOnChange = {this.inputOnChange}
-          handleSubmit = {this.handleSubmit}
-          toggleButton = {this.toggleButton}
-        />
+        <div>
+          <NewPlaylist
+            btnSwitch = {this.state.btnSwitch}
+            inputValue = {this.state.inputValue}
+            inputOnChange = {this.inputOnChange}
+            handleSubmit = {this.handleSubmit}
+            toggleButton = {this.toggleButton}
+          />
+        </div>
       </div>
     )
   }
