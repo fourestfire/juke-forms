@@ -1,6 +1,7 @@
 import React from 'react';
 import NewPlaylist from '../components/NewPlaylist'
 import {initialInputValue} from '../utils'
+import axios from 'axios';
 
 class PlaylistContainer extends React.Component {
 
@@ -26,7 +27,7 @@ class PlaylistContainer extends React.Component {
   }
 
   savePlaylist (value) {
-    axios.post('/api/playlist', {name: value})
+    axios.post('/api/playlists', {name: value})
     .then(res => res.data)
     .then(result => {
     console.log(result) // response json from the server!
