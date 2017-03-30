@@ -80,11 +80,11 @@
 	
 	var _Songs2 = _interopRequireDefault(_Songs);
 	
-	var _NewPlaylist = __webpack_require__(271);
+	var _NewPlaylist = __webpack_require__(269);
 	
 	var _NewPlaylist2 = _interopRequireDefault(_NewPlaylist);
 	
-	var _FilterableArtistsContainer = __webpack_require__(269);
+	var _FilterableArtistsContainer = __webpack_require__(270);
 	
 	var _FilterableArtistsContainer2 = _interopRequireDefault(_FilterableArtistsContainer);
 	
@@ -28726,18 +28726,18 @@
 /* 266 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	var convertSong = exports.convertSong = function convertSong(song) {
-	  song.audioUrl = "/api/songs/" + song.id + "/audio";
+	  song.audioUrl = '/api/songs/' + song.id + '/audio';
 	  return song;
 	};
 	
 	var convertAlbum = exports.convertAlbum = function convertAlbum(album) {
-	  album.imageUrl = "/api/albums/" + album.id + "/image";
+	  album.imageUrl = '/api/albums/' + album.id + '/image';
 	  album.songs = album.songs.map(convertSong);
 	  return album;
 	};
@@ -28763,6 +28763,8 @@
 	  var next = currentSongList[idx];
 	  return [next, currentSongList];
 	};
+	
+	var initialInputValue = exports.initialInputValue = Symbol('initialInputValue');
 
 /***/ },
 /* 267 */
@@ -28919,6 +28921,91 @@
 	  value: true
 	});
 	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _utils = __webpack_require__(266);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var NewPlaylist = function NewPlaylist(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'well' },
+	    _react2.default.createElement(
+	      'form',
+	      {
+	        onSubmit: function onSubmit(event) {
+	          console.log('we clicked submit');
+	          event.preventDefault();
+	          props.handleSubmit();
+	        },
+	        className: 'form-horizontal' },
+	      _react2.default.createElement(
+	        'fieldset',
+	        null,
+	        _react2.default.createElement(
+	          'legend',
+	          null,
+	          'New Playlist'
+	        ),
+	        props.inputValue !== _utils.initialInputValue && props.btnSwitch ? _react2.default.createElement(
+	          'div',
+	          { className: 'alert alert-warning' },
+	          'Please enter a name'
+	        ) : null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group' },
+	          _react2.default.createElement(
+	            'label',
+	            { className: 'col-xs-2 control-label' },
+	            'Name'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-xs-10' },
+	            _react2.default.createElement('input', {
+	              value: props.inputValue === _utils.initialInputValue ? "" : props.inputValue,
+	              onChange: function onChange(event) {
+	                props.inputOnChange(event.target.value);
+	                props.toggleButton(event.target.value);
+	              },
+	              className: 'form-control', type: 'text'
+	            })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form-group' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-xs-10 col-xs-offset-2' },
+	            _react2.default.createElement(
+	              'button',
+	              { disabled: props.btnSwitch, type: 'submit', className: 'btn btn-success', id: 'submitBtn' },
+	              'Create Playlist'
+	            )
+	          )
+	        )
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = NewPlaylist;
+
+/***/ },
+/* 270 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(1);
@@ -28929,7 +29016,7 @@
 	
 	var _Artists2 = _interopRequireDefault(_Artists);
 	
-	var _FilterInput = __webpack_require__(270);
+	var _FilterInput = __webpack_require__(271);
 	
 	var _FilterInput2 = _interopRequireDefault(_FilterInput);
 	
@@ -28989,7 +29076,7 @@
 	exports.default = FilterableArtistsContainer;
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29021,83 +29108,6 @@
 	exports.default = FilterInput;
 
 /***/ },
-/* 271 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var NewPlaylist = function NewPlaylist(props) {
-	
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'well' },
-	    _react2.default.createElement(
-	      'form',
-	      {
-	        onSubmit: function onSubmit(event) {
-	          console.log('we clicked submit');
-	          event.preventDefault();
-	          props.handleSubmit(props.inputValue);
-	        },
-	        className: 'form-horizontal' },
-	      _react2.default.createElement(
-	        'fieldset',
-	        null,
-	        _react2.default.createElement(
-	          'legend',
-	          null,
-	          'New Playlist'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group' },
-	          _react2.default.createElement(
-	            'label',
-	            { className: 'col-xs-2 control-label' },
-	            'Name'
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'col-xs-10' },
-	            _react2.default.createElement('input', {
-	              onChange: function onChange(event) {
-	                return props.inputOnChange(event.target.value);
-	              },
-	              className: 'form-control', type: 'text'
-	            })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'col-xs-10 col-xs-offset-2' },
-	            _react2.default.createElement(
-	              'button',
-	              { type: 'submit', className: 'btn btn-success' },
-	              'Create Playlist'
-	            )
-	          )
-	        )
-	      )
-	    )
-	  );
-	};
-	
-	exports.default = NewPlaylist;
-
-/***/ },
 /* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -29113,9 +29123,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _NewPlaylist = __webpack_require__(271);
+	var _NewPlaylist = __webpack_require__(269);
 	
 	var _NewPlaylist2 = _interopRequireDefault(_NewPlaylist);
+	
+	var _utils = __webpack_require__(266);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29133,24 +29145,44 @@
 	
 	    var _this = _possibleConstructorReturn(this, (PlaylistContainer.__proto__ || Object.getPrototypeOf(PlaylistContainer)).call(this, props));
 	
-	    _this.state = { inputValue: '' };
+	    _this.state = { inputValue: _utils.initialInputValue, btnSwitch: true };
 	    _this.inputOnChange = _this.inputOnChange.bind(_this);
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    _this.toggleButton = _this.toggleButton.bind(_this);
+	    _this.savePlaylist = _this.savePlaylist.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(PlaylistContainer, [{
 	    key: 'inputOnChange',
 	    value: function inputOnChange(value) {
-	      console.log(value);
 	      this.setState({
 	        inputValue: value
 	      });
 	    }
 	  }, {
+	    key: 'toggleButton',
+	    value: function toggleButton(value) {
+	      this.setState({
+	        btnSwitch: value.length > 16 || value.length < 1
+	      });
+	    }
+	  }, {
+	    key: 'savePlaylist',
+	    value: function savePlaylist(value) {
+	      axios.post('/api/playlist', { name: value }).then(function (res) {
+	        return res.data;
+	      }).then(function (result) {
+	        console.log(result); // response json from the server!
+	      });
+	    }
+	  }, {
 	    key: 'handleSubmit',
-	    value: function handleSubmit(value) {
-	      console.log("submitted val", value);
+	    value: function handleSubmit() {
+	      this.savePlaylist(this.state.inputValue);
+	      this.setState({
+	        inputValue: ''
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -29160,9 +29192,11 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_NewPlaylist2.default, {
+	          btnSwitch: this.state.btnSwitch,
 	          inputValue: this.state.inputValue,
 	          inputOnChange: this.inputOnChange,
-	          handleSubmit: this.handleSubmit
+	          handleSubmit: this.handleSubmit,
+	          toggleButton: this.toggleButton
 	        })
 	      );
 	    }

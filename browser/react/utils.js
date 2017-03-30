@@ -20,3 +20,5 @@ export const skip = (interval, { currentSongList, currentSong }) => {
   const next = currentSongList[idx];
   return [next, currentSongList];
 };
+
+export const initialInputValue = Symbol('initialInputValue')
