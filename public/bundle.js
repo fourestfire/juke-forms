@@ -29338,7 +29338,64 @@
 	          null,
 	          'No songs.'
 	        ),
-	        _react2.default.createElement('hr', null)
+	        _react2.default.createElement('hr', null),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'well' },
+	          _react2.default.createElement(
+	            'form',
+	            { className: 'form-horizontal', noValidate: true, name: 'songSelect' },
+	            _react2.default.createElement(
+	              'fieldset',
+	              null,
+	              _react2.default.createElement(
+	                'legend',
+	                null,
+	                'Add to Playlist'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'form-group' },
+	                _react2.default.createElement(
+	                  'label',
+	                  { htmlFor: 'song', className: 'col-xs-2 control-label' },
+	                  'Song'
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'col-xs-10' },
+	                  _react2.default.createElement(
+	                    'select',
+	                    { className: 'form-control', name: 'song' },
+	                    _react2.default.createElement(
+	                      'option',
+	                      { value: 'song1' },
+	                      'song name'
+	                    ),
+	                    _react2.default.createElement(
+	                      'option',
+	                      { value: 'song2' },
+	                      'another song name'
+	                    )
+	                  )
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'form-group' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'col-xs-10 col-xs-offset-2' },
+	                  _react2.default.createElement(
+	                    'button',
+	                    { type: 'submit', className: 'btn btn-success' },
+	                    'Add Song'
+	                  )
+	                )
+	              )
+	            )
+	          )
+	        )
 	      );
 	    }
 	  }]);
